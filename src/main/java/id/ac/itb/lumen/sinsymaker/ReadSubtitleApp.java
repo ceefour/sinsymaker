@@ -21,6 +21,6 @@ public class ReadSubtitleApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         final SubtitleReader subtitleReader = new SubtitleReader();
-        subtitleReader.read(new File("/together/project_amanah/expressive/dongeng-bangau.ass"));
+        subtitleReader.read(new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.ass"));
     }
 }

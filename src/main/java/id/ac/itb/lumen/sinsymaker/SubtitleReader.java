@@ -17,11 +17,12 @@ public class SubtitleReader {
 
     private static final Logger log = LoggerFactory.getLogger(SubtitleReader.class);
 
-    public void read(File file) {
+    public TimedTextObject read(File file) {
         final FormatASS formatAss = new FormatASS();
         try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(file))) {
             final TimedTextObject tto = formatAss.parseFile(file.toString(), is);
             log.info("Captions: {}", tto.captions);
+            return tto;
         } catch (java.io.IOException e) {
             throw new RuntimeException("Cannot read " + file, e);
         }

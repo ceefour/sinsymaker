@@ -21,6 +21,6 @@ public class DecodeAudioApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         final AudioReader reader = new AudioReader();
-        reader.read(new File("/together/project_amanah/expressive/dongeng-bangau.wav"));
+        reader.read(new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.wav"));
     }
 }

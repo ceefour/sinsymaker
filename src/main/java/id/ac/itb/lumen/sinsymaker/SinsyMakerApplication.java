@@ -21,8 +21,9 @@ public class SinsyMakerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         final LineExtractor lineExtractor = new LineExtractor();
-        lineExtractor.sourceAudioFile = new File("/together/project_amanah/expressive/Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.ogg");
-        lineExtractor.subtitleFile = new File("/together/project_amanah/expressive/dongeng-bangau.ass");
-
+        lineExtractor.sourceAudioFile = new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.wav");
+        lineExtractor.subtitleFile = new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.ass");
+        lineExtractor.init();
+        lineExtractor.extractAll();
     }
 }
