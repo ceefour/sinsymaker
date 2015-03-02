@@ -3,14 +3,19 @@ package id.ac.itb.lumen.sinsymaker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Profile;
 
 import java.io.File;
 
 @SpringBootApplication
+@Profile("sinsymaker")
 public class SinsyMakerApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
-        SpringApplication.run(SinsyMakerApplication.class, args);
+        new SpringApplicationBuilder(SinsyMakerApplication.class)
+                .profiles("sinsymaker")
+                .run(args);
     }
 
     @Override

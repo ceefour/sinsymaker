@@ -9,18 +9,18 @@ import org.springframework.context.annotation.Profile;
 import java.io.File;
 
 @SpringBootApplication
-@Profile("readsubtitle")
-public class ReadSubtitleApp implements CommandLineRunner {
+@Profile("decodeaudio")
+public class DecodeAudioApp implements CommandLineRunner {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(ReadSubtitleApp.class)
-                .profiles("readsubtitle")
+        new SpringApplicationBuilder(DecodeAudioApp.class)
+                .profiles("decodeaudio")
                 .run(args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        final SubtitleReader subtitleReader = new SubtitleReader();
-        subtitleReader.read(new File("/together/project_amanah/expressive/dongeng-bangau.ass"));
+        final AudioReader reader = new AudioReader();
+        reader.read(new File("/together/project_amanah/expressive/dongeng-bangau.wav"));
     }
 }
