@@ -40,14 +40,15 @@ public class LineExtractor {
         subtitle = subtitleReader.read(subtitleFile);
     }
 
-    public void extractAll() {
+    public void extractAll(File destDir) {
+        destDir.mkdirs();
         final ArrayList<SegmentWaveformWriter> segmentWriters = new ArrayList<>();
         for (final Caption caption : subtitle.captions.values()) {
             int strictFrameStart = Math.round(format.getSampleRate() * caption.start.getMseconds() / 1000f);
             int strictFrameEnd = Math.round(format.getSampleRate() * caption.end.getMseconds() / 1000f);
             int frameStart = Math.round(strictFrameStart - ATTACK_MS / 1000f * format.getSampleRate());
             int frameEnd = Math.round(strictFrameEnd + DECAY_MS / 1000f * format.getSampleRate());
-            final File file = new File(System.getProperty("user.home") + "/tmp", caption.content + ".wav");
+            final File file = new File(destDir, caption.content + ".wav");
             final SegmentWaveformWriter segmentWriter = new SegmentWaveformWriter(format, file.getPath(), frameStart, frameEnd, ATTACK_MS, DECAY_MS);
             segmentWriters.add(segmentWriter);
         }

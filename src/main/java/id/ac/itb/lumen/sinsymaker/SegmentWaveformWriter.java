@@ -22,8 +22,8 @@ public class SegmentWaveformWriter implements AudioProcessor {
     private final AudioFormat format;
     private final File rawOutputFile;
     private final String fileName;
-    private final int frameStart;
-    private final int frameEnd;
+    private final long frameStart;
+    private final long frameEnd;
     private final int attack;
     private final int decay;
     private BufferedOutputStream rawOutputStream;
@@ -45,7 +45,7 @@ public class SegmentWaveformWriter implements AudioProcessor {
      * @param format The format of the received bytes.
      * @param fileName The name of the wav file to store.
      */
-    public SegmentWaveformWriter(final AudioFormat format, final String fileName, int frameStart, int frameEnd,
+    public SegmentWaveformWriter(final AudioFormat format, final String fileName, long frameStart, long frameEnd,
                                  int attackFrames, int decayFrames){
         this.format = format;
         this.frameStart = frameStart;
@@ -73,16 +73,16 @@ public class SegmentWaveformWriter implements AudioProcessor {
         }
     }
 
-    public SegmentWaveformWriter(final TarsosDSPAudioFormat format, final String fileName, int frameStart, int frameEnd,
+    public SegmentWaveformWriter(final TarsosDSPAudioFormat format, final String fileName, long frameStart, long frameEnd,
                                  int attack, int decay) {
         this(JVMAudioInputStream.toAudioFormat(format), fileName, frameStart, frameEnd, attack, decay);
     }
 
-    public int getFrameStart() {
+    public long getFrameStart() {
         return frameStart;
     }
 
-    public int getFrameEnd() {
+    public long getFrameEnd() {
         return frameEnd;
     }
 

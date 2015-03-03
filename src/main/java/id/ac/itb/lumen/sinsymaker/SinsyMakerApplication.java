@@ -24,6 +24,6 @@ public class SinsyMakerApplication implements CommandLineRunner {
         lineExtractor.sourceAudioFile = new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.wav");
         lineExtractor.subtitleFile = new File("/together/project_amanah/lumen/speech/expressive/dongeng-bangau.ass");
         lineExtractor.init();
-        lineExtractor.extractAll();
+        lineExtractor.extractAll(new File("/together/project_amanah/lumen/speech/expressive/clauses"));
     }
 }
