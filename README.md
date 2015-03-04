@@ -1,18 +1,37 @@
 # sinsymaker
 HTS Voice creator from arbitrary karaoke song, generates singer library usable by Sinsy singing synthesizer
 
-## TarsosDSP
+## Beads
+
+Until [Beads](http://www.beadsproject.net/) is in Maven Central, you'll need to install it first.
+
+1. Download [Beads](http://www.beadsproject.net/)
+2. Install the main JARs:
+
+        mvn install:install-file -Dfile=D:/beads/library/beads.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02
+        mvn install:install-file -Dfile=D:/beads/library/beads-io.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02
+
+3. Package and install the "source" JARs:
+
+        # I already generated those:
+        #jar -cvf F:/project_passport/lumen/speech/beads/beads-1.02-sources.jar -C "D:/beads/src/beads_main" .
+        #jar -cvf F:/project_passport/lumen/speech/beads/beads-io-1.02-sources.jar -C "D:/beads/src/beads_io" .
+        # All you have to is install them:
+        mvn install:install-file -Dfile=F:/project_passport/lumen/speech/beads/beads-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02 -Dclassifier=sources
+        mvn install:install-file -Dfile=F:/project_passport/lumen/speech/beads/beads-io-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02 -Dclassifier=sources
+
+## TarsosDSP (TODO: replace with Beads)
 
 Until [TarsosDSP](https://github.com/JorenSix/TarsosDSP) is in Maven Central, you'll need to install it first.
 
 1. Download [TarsosDSP](https://github.com/JorenSix/TarsosDSP)
 2. Install the main JAR:
 
-        mvn install:install-file -Dfile=/together/project_amanah/lumen/speech/TarsosDSP-2.0-bin.jar -Dpackaging=jar -DgroupId=be.tarsos.dsp -DartifactId=tarsosdsp -Dversion=2.0
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/TarsosDSP-2.0-bin.jar -Dpackaging=jar -DgroupId=be.tarsos.dsp -DartifactId=tarsosdsp -Dversion=2.0
 
 3. Install the "source" JAR (it actually contains both `.class` and `.java` files):
 
-        mvn install:install-file -Dfile=/together/project_amanah/lumen/speech/TarsosDSP-2.0-with-sources.jar -Dpackaging=jar -DgroupId=be.tarsos.dsp -DartifactId=tarsosdsp -Dversion=2.0 -Dclassifier=sources
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/TarsosDSP-2.0-with-sources.jar -Dpackaging=jar -DgroupId=be.tarsos.dsp -DartifactId=tarsosdsp -Dversion=2.0 -Dclassifier=sources
 
 ## Preparing WAV PCM Mono Audio
 

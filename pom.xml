@@ -26,6 +26,17 @@
 
 	<dependencies>
         <dependency>
+            <groupId>net.beadsproject</groupId>
+            <artifactId>beads</artifactId>
+            <version>1.02</version>
+        </dependency>
+        <dependency>
+            <groupId>net.beadsproject</groupId>
+            <artifactId>beads-io</artifactId>
+            <version>1.02</version>
+        </dependency>
+
+        <dependency>
             <groupId>be.tarsos.dsp</groupId>
             <artifactId>tarsosdsp</artifactId>
             <version>2.0</version>
