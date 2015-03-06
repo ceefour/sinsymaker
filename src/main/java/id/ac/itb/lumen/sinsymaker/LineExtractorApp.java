@@ -28,6 +28,7 @@ public class LineExtractorApp implements CommandLineRunner {
 
         final LineExtractor lineExtractor = new LineExtractor();
         lineExtractor.sourceAudioFile = new File(passport, "project_passport/lumen/speech/expressive/dongeng-bangau.wav");
+//        lineExtractor.sourceAudioFile = new File(passport, "project_passport/lumen/speech/expressive/dongeng-bangau.ogg");
         lineExtractor.subtitleFile = new File(passport, "project_passport/lumen/speech/expressive/dongeng-bangau.ass");
         lineExtractor.init();
         lineExtractor.extractAll(new File(passport, "project_passport/lumen/speech/expressive/clauses"));

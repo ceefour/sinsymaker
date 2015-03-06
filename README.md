@@ -47,22 +47,6 @@ Until [TarsosDSP](https://github.com/JorenSix/TarsosDSP) is in Maven Central, yo
 
         mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/TarsosDSP-2.0-with-sources.jar -Dpackaging=jar -DgroupId=be.tarsos.dsp -DartifactId=tarsosdsp -Dversion=2.0 -Dclassifier=sources
 
-## Preparing WAV PCM Mono Audio
-
-TarsosDSP only supports mono. While Java only supports WAV PCM (among other less useful formats).
-
-If you want to downmix stereo to mono:
-
-    avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -ac 1 dongeng-bangau.wav
-
-If you want to take only left channel:
-
-    avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -af pan=1:c0=c0 dongeng-bangau-left.wav
-
-If you want to take only right channel:
-
-    avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -af pan=1:c0=c1 dongeng-bangau-right.wav
-
 ## Audio Output Format
 
 We'll be using ACID Loop File format (i.e. enhanced WAV) when generating all output audios.

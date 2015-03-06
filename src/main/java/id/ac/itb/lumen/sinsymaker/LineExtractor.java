@@ -1,5 +1,6 @@
 package id.ac.itb.lumen.sinsymaker;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Range;
 import net.beadsproject.beads.data.Sample;
 import net.beadsproject.beads.data.SampleManager;
@@ -47,7 +48,8 @@ public class LineExtractor {
     public void extractAll(File destDir) {
         destDir.mkdirs();
 
-        final Sample sourceSample = SampleManager.sample(sourceAudioFile.getPath());
+        final Sample sourceSample = Preconditions.checkNotNull(SampleManager.sample(sourceAudioFile.getPath()),
+                "Cannot load '%s', either file does not exist or cannot handle audio format", sourceAudioFile);
 
         for (final Caption caption : subtitle.captions.values()) {
             int captionLength = caption.end.getMseconds() - caption.start.getMseconds();
