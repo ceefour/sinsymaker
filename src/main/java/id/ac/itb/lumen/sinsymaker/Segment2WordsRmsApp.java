@@ -102,6 +102,7 @@ public class Segment2WordsRmsApp implements CommandLineRunner {
         // In Paul Mealor's choral work, De Profundis, the bass soloist is asked to sing an E1.
         // E1 = 41 Hz
         // C7 = 2093 Hz
+        // "S"es are at around 4000hz. "S" sounds are almost always above 3500hz and for a woman's voice as high as 7500hz.
         spectralDiff.setFreqWindow(41f, 2093f);
 
         AtomicInteger specdiffIdx = new AtomicInteger();
