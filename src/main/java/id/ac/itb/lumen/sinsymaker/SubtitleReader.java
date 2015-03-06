@@ -21,7 +21,7 @@ public class SubtitleReader {
         final FormatASS formatAss = new FormatASS();
         try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(file))) {
             final TimedTextObject tto = formatAss.parseFile(file.toString(), is);
-            log.info("Captions: {}", tto.captions);
+            log.info("{} Captions: {}", tto.captions.size(), tto.captions.keySet());
             return tto;
         } catch (java.io.IOException e) {
             throw new RuntimeException("Cannot read " + file, e);

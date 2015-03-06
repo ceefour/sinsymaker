@@ -13,7 +13,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import java.io.*;
-import java.util.Random;
 
 /**
  * Created by ceefour on 02/03/15.

@@ -8,8 +8,12 @@ Until [Beads](http://www.beadsproject.net/) is in Maven Central, you'll need to 
 1. Download [Beads](http://www.beadsproject.net/)
 2. Install the main JARs:
 
+        # Windows
         mvn install:install-file -Dfile=D:/beads/library/beads.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02
         mvn install:install-file -Dfile=D:/beads/library/beads-io.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02
+        # Linux
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/beads/beads/library/beads.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/beads/beads/library/beads-io.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02
 
 3. Package and install the "source" JARs:
 
@@ -17,8 +21,18 @@ Until [Beads](http://www.beadsproject.net/) is in Maven Central, you'll need to 
         #jar -cvf F:/project_passport/lumen/speech/beads/beads-1.02-sources.jar -C "D:/beads/src/beads_main" .
         #jar -cvf F:/project_passport/lumen/speech/beads/beads-io-1.02-sources.jar -C "D:/beads/src/beads_io" .
         # All you have to is install them:
+        # Windows
         mvn install:install-file -Dfile=F:/project_passport/lumen/speech/beads/beads-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02 -Dclassifier=sources
         mvn install:install-file -Dfile=F:/project_passport/lumen/speech/beads/beads-io-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02 -Dclassifier=sources
+        # Linux
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/beads/beads-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads -Dversion=1.02 -Dclassifier=sources
+        mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/beads/beads-io-1.02-sources.jar -Dpackaging=jar -DgroupId=net.beadsproject -DartifactId=beads-io -Dversion=1.02 -Dclassifier=sources
+
+## VorbisSPI
+
+There's one file missing for vorbisspi in Maven, so:
+
+    mvn install:install-file -Dfile=/media/ceefour/passport/project_passport/lumen/speech/VorbisSPI1.0.3/lib/jogg-0.0.7.jar -DgroupId=com.jcraft -DartifactId=jogg -Dversion=0.0.7 -Dpackaging=jar
 
 ## TarsosDSP (TODO: replace with Beads)
 
