@@ -63,7 +63,10 @@ TBD Format for Expressive Rythmo Band:
      Indonesian word distribution (general, 10,000 words each): http://www.slideshare.net/geovedi/perbandingan-distribusi-frekuensi-kata-bahasa-indonesia-di-kompas-wikipedia-twitter-dan-kaskus
      https://github.com/ardwort/freq-dist-id
      idwiki is best, Kompas is too political.
-     
+     For word analysis in children stories, see [CeritaKecil.com](http://www.ceritakecil.com/) especially
+     by Aesop, e.g. http://www.ceritakecil.com/cerita-dan-dongeng/Anak-Kambing-dan-Serigala-25
+     see `F:\project_passport\lumen\speech\expressive\ceritakecil`
+
 2. Time each sentence and clause or gestures. Then time each word and syllable.
     Gestures are language-independent voice, like laughing, sobbing, etc.
 3. Tag each clause/word/syllable with emotion and gender.
