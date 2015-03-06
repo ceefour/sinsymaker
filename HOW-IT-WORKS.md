@@ -56,16 +56,23 @@ TBD Format for Expressive Rythmo Band:
 
 1. Find or write a drama script
     Optional but recommended: There should be a video.
-     If you want to create a voice database, you need to analyze the most common words,
-     emotions, and gestures for the target segment (i.e. Indonesian children book with animals)
-     and write a drama script from that, which can be reused many times for different speakers,
-     and also for speech recognition purpose.
-     Indonesian word distribution (general, 10,000 words each): http://www.slideshare.net/geovedi/perbandingan-distribusi-frekuensi-kata-bahasa-indonesia-di-kompas-wikipedia-twitter-dan-kaskus
-     https://github.com/ardwort/freq-dist-id
-     idwiki is best, Kompas is too political.
-     For word analysis in children stories, see [CeritaKecil.com](http://www.ceritakecil.com/) especially
-     by Aesop, e.g. http://www.ceritakecil.com/cerita-dan-dongeng/Anak-Kambing-dan-Serigala-25
-     see `F:\project_passport\lumen\speech\expressive\ceritakecil`
+    If you want to create a voice database, you need to analyze the most common words,
+    emotions, and gestures for the target segment (i.e. Indonesian children book with animals)
+    and write a drama script from that, which can be reused many times for different speakers,
+    and also for speech recognition purpose.
+    Indonesian word distribution (general, 10,000 words each): http://www.slideshare.net/geovedi/perbandingan-distribusi-frekuensi-kata-bahasa-indonesia-di-kompas-wikipedia-twitter-dan-kaskus
+    https://github.com/ardwort/freq-dist-id
+    idwiki is best, Kompas is too political.
+    
+    For word analysis in children stories, see [CeritaKecil.com](http://www.ceritakecil.com/) especially
+    by Aesop, e.g. http://www.ceritakecil.com/cerita-dan-dongeng/Anak-Kambing-dan-Serigala-25
+    see `F:\project_passport\lumen\speech\expressive\ceritakecil`
+    
+    After you get the word distribution, the next step is devising a script or a set of scripts
+    as natural as possible, that can cover (some overlapping is fine) *most* of the words
+    in all the emotions, gestures, and genders you want.
+    "Most" here means about 90% of the words in a story will be covered by it.
+    The rest of the words can be synthesized using mbrola-male-id1 with espeak, festival, or HTS.
 
 2. Time each sentence and clause or gestures. Then time each word and syllable.
     Gestures are language-independent voice, like laughing, sobbing, etc.
