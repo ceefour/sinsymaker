@@ -38,6 +38,16 @@ public class Word {
          * e.g. "uh", "er", "um", "huh", "erm".
          */
         FILLER,
+        /**
+         * A prefix, such as "ber-", "di-", "per-".
+         * Phoneme assimilation might be desirable in some cases.
+         */
+        PREFIX,
+        /**
+         * A suffix, such as "-an", "-kan".
+         * Phoneme assimilation might be desirable in some cases.
+         */
+        SUFFIX,
     }
 
     String id;
