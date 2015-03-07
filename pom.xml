@@ -26,6 +26,12 @@
 
 	<dependencies>
         <dependency>
+            <groupId>org.soluvas</groupId>
+            <artifactId>org.soluvas.commons</artifactId>
+            <version>2.2.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>vorbisspi</artifactId>
             <version>1.0.3-1</version>
@@ -44,6 +50,22 @@
             <groupId>net.beadsproject</groupId>
             <artifactId>beads-io</artifactId>
             <version>1.02</version>
+        </dependency>
+        <!-- Spring Boot 1.2.1 JacksonAutoConfiguration not compatible with Jackson 2.5+ -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>2.4.5</version>
         </dependency>
 
         <!--<dependency>
@@ -66,6 +88,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-neo4j</artifactId>
+            <version>3.2.2.RELEASE</version>
+        </dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -82,5 +109,33 @@
 			</plugin>
 		</plugins>
 	</build>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>bippo-nexus-public</id>
+            <url>http://nexus.bippo.co.id/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>soluvas-public-snapshots</id>
+            <url>http://nexus.bippo.co.id/nexus/content/repositories/soluvas-public-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>soluvas-public-releases</id>
+            <url>http://nexus.bippo.co.id/nexus/content/repositories/soluvas-public-releases/</url>
+        </repository>
+    </distributionManagement>
 
 </project>
