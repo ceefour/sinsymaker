@@ -41,6 +41,8 @@ public class Voice {
     int bodyLength;
     int postStart;
     int postLength;
+    float pitch;
+    float rms;
 
     /**
      * e.g. {@code kamu_pasti_kedinginan}
@@ -184,5 +186,29 @@ public class Voice {
 
     public void setPostLength(int postLength) {
         this.postLength = postLength;
+    }
+
+    /**
+     * {@link net.beadsproject.beads.ugens.RMS} (root-mean-square) power in sample-float (always positive).
+     * @return
+     */
+    public float getRms() {
+        return rms;
+    }
+
+    public void setRms(float rms) {
+        this.rms = rms;
+    }
+
+    /**
+     * Average pitch of this voice in Hz.
+     * @return
+     */
+    public float getPitch() {
+        return pitch;
+    }
+
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
     }
 }
