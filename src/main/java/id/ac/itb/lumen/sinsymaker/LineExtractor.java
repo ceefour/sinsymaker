@@ -148,6 +148,7 @@ public class LineExtractor {
             clauseVoice.setKind(Voice.Kind.CLAUSE);
             clauseVoice.setClauseId(clause.getId());
             clauseVoice.setPrevWordId(lastWord.map(Word::getId).orElse(null));
+            clauseVoice.setRelativePosition(Voice.RelativePosition.BEGIN_SENTENCE);
             speechGraph.getVoices().put(clauseVoice.getId(), clauseVoice);
 
             final Range<Integer> strictFrames = Range.closedOpen(
@@ -167,6 +168,7 @@ public class LineExtractor {
             final Matcher wordMatcher = K_REPLACER_WORD.matcher(captionMarkup);
             int curFrame = strictFrames.lowerEndpoint();
             if (wordMatcher.find()) {
+                boolean firstWordInClause = true;
                 do {
                     final int durationInCs = Integer.parseInt(wordMatcher.group(1));
                     final int durationInFrames = Math.round(durationInCs / 100f * sourceSample.getSampleRate());
@@ -202,6 +204,7 @@ public class LineExtractor {
                     wordVoice.setLanguage(INDONESIAN);
                     wordVoice.setPrevWordId(lastWord.map(Word::getId).orElse(null));
                     wordVoice.setSpeakerId("kid_telling_stories");
+                    wordVoice.setRelativePosition(firstWordInClause ? Voice.RelativePosition.BEGIN_CLAUSE : Voice.RelativePosition.IN_CLAUSE);
                     speechGraph.getVoices().put(wordVoice.getId(), wordVoice);
 
                     final File wordFile = new File(wordsDir, voiceId + ".wav");
@@ -220,7 +223,10 @@ public class LineExtractor {
 
                     lastWordVoice = Optional.of(wordVoice);
                     lastWord = Optional.of(word);
+                    firstWordInClause = false;
                 } while (wordMatcher.find());
+                lastWordVoice.get().setRelativePosition(lastWordVoice.get().getRelativePosition() == Voice.RelativePosition.BEGIN_CLAUSE ?
+                        Voice.RelativePosition.INDEPENDENT : Voice.RelativePosition.END_CLAUSE);
             } else {
                 log.info("No k-replacer for {}", captionMarkup);
             }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * A graph that contains information about words, clauses, and vocal emotions/prosody;
@@ -18,9 +19,9 @@ import java.util.Map;
 @JsonSubTypes(@JsonSubTypes.Type(name = "Word", value = Word.class))
 public class SpeechGraph {
 
-    final Map<String, Word> words = new HashMap<>();
-    final Map<String, Clause> clauses = new HashMap<>();
-    final Map<String, Voice> voices = new HashMap<>();
+    final Map<String, Word> words = new TreeMap<>();
+    final Map<String, Clause> clauses = new TreeMap<>();
+    final Map<String, Voice> voices = new TreeMap<>();
 
     /**
      * Key is word ID.

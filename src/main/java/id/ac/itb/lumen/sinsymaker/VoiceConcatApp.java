@@ -33,6 +33,6 @@ public class VoiceConcatApp implements CommandLineRunner {
                 new File(passport, "project_passport/lumen/speech/expressive/clauses"),
                 new File(passport, "project_passport/lumen/speech/expressive/words"),
 //                ImmutableList.of("yosaku3", "menjual", "bangau2", "yang", "bernama", "gunung2"));
-                ImmutableList.of("yosaku3", "pulang", "dari", "kota", "hingga", "bernama", "bangau2", "bakar"));
+                ImmutableList.of("yosaku3", "pulang", "dari", "kota", "hingga", "bernama", "bangau2", "bakar", "yosaku5"));
     }
 }

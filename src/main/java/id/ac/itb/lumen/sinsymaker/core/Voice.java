@@ -23,6 +23,41 @@ public class Voice {
         CLAUSE, WORD;
     }
 
+    public static enum RelativePosition {
+        /**
+         * Begins an entire sentence.
+         */
+        BEGIN_SENTENCE,
+        /**
+         * Begin of a clause but not sentence, for example "that" in "I want to let you know, that I'm happy".
+         */
+        BEGIN_CLAUSE,
+        /**
+         * Inside a running clause.
+         */
+        IN_CLAUSE,
+        /**
+         * End a clause but not the sentence, for example "know" in "I want to let you know, that I'm happy".
+         */
+        END_CLAUSE,
+        /**
+         * End of sentence before a period prosody, ellipsis prosody, question prosody, or exclamation prosody.
+         */
+        END_SENTENCE,
+        /**
+         * For example "Yes", "No".
+         */
+        INDEPENDENT,
+        /**
+         * An independent word leading to something else, e.g. "Hi", "Well".
+         */
+        LEADING,
+        /**
+         * An independent word trailing from something else, e.g. "love" in "What I feel for you is... love"
+         */
+        TRAILING
+    }
+
     String id;
     String name;
     Kind kind;
@@ -34,6 +69,8 @@ public class Voice {
     Locale language;
     String prevWordId;
     String nextWordId;
+    RelativePosition relativePosition;
+
     int length;
     int preStart;
     int preLength;
@@ -126,6 +163,14 @@ public class Voice {
 
     public void setNextWordId(String nextWordId) {
         this.nextWordId = nextWordId;
+    }
+
+    public RelativePosition getRelativePosition() {
+        return relativePosition;
+    }
+
+    public void setRelativePosition(RelativePosition relativePosition) {
+        this.relativePosition = relativePosition;
     }
 
     /**

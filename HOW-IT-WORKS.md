@@ -13,9 +13,11 @@ There are several steps from preparing to playing:
 ## Formats
 
 We use 1 channel (Mono), 48000 Hz sample rate, 16-bit audio.
-The intermediate format is WAV PCM, and JSON, TODO: with RIFF metadata.
-The final format would be Ogg FLAC (`libvorbis` codec), ~406 kbps bitrate.
+The intermediate format for some Ogg FLAC-incapable preprocessing is WAV PCM, and JSON, TODO: with RIFF metadata.
+Most processing should be done using Ogg FLAC (`flac` codec), ~406 kbps bitrate.
 For pre-existing audio, 44.1 kHz sample rate with Ogg FLAC is also accepted.
+Final voice database uses Ogg Vorbis (`libvorbis` codec), 48 kHz, mono, 96 kbps;
+which should never be processed again due to known distortion, so only for synthesis purpose.
 
 * Why mono? Speech/singing has single source. We can pan the sound during play.
 * Why not 44.1K/96K? While it's true we'll be modifying pitches, speech & singing is limited
@@ -75,11 +77,13 @@ If you want to take only right channel:
 ### Preparing - Expressive
 
 1. Optional but recommended: A video for a drama script.
-    To get the OGG audio for the video, use e.g.:
+    To get the Ogg FLAC audio for the video, use e.g.:
 
         # Specifies 128k, in practice you'll get 79 kbps bitrate
+        # 67.8 MiB PCM WAV -> 39 MiB mono-44.1kHz-406.5kbps Ogg FLAC
+        avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -ac 1 -acodec flac dongeng-bangau.ogg
         # 67.8 MiB PCM WAV -> 7.6 MiB 128k-mono-44.1kHz Vorbis
-        avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -ac 1 -acodec libvorbis -b 128k dongeng-bangau.ogg
+        #avconv -i Dongeng_Anak_Pengantar_Tidur_Balas_Budi_Burung_Bangau.mp4 -vn -ac 1 -acodec libvorbis -b 128k dongeng-bangau.ogg
 
 2. Find or write a drama script, or write the drama script for video in point 1.
     If you want to create a voice database, you need to analyze the most common words,
@@ -98,7 +102,7 @@ If you want to take only right channel:
     as natural as possible, that can cover (some overlapping is fine) *most* of the words
     in all the emotions, gestures, and genders you want.
     "Most" here means about 90% of the words in a story will be covered by it.
-    The rest of the words can be synthesized using mbrola-male-id1 with espeak, festival, or HTS.
+    The rest of the words can be synthesized using mbrola-male-id1 with espeak, festival, or [HTS](http://hts.sp.nitech.ac.jp).
 
 2. Time each sentence and clause or gestures. Then time each word and syllable.
     Gestures are language-independent voice, like laughing, sobbing, etc.
@@ -162,3 +166,12 @@ because "di" for "atas" will sound more like "diya", where "di" for "bawah" will
 Each word is tagged by its previous word, next word, previous diphone, and next diphone.
 Which will be prioritized during synthesis.
 
+## Hierarchical Structure for Prosody in Sentence Production
+
+According to [Creation of Prosody During Sentence Production - Fernanda Ferreira 1993](http://www.wjh.harvard.edu/~pal/pdfs/prosody/ferreira93.pdf),
+natural-sounding sentences are not word-for-word, but rather a sentence, with hierarchical structure.
+
+So inspired by that, I attempt to model the voice database by also tagging each voice's position in the (relative) hierarchy.
+During synthesis, the sentence is first analyzed (if no predetermined analysis has been done) in order to generate
+a "speech plan", which is the breakdown of a sentence into its prosody pattern, both linear prosody (covering the entire sentence) and
+hierarchical prosody (as tree nodes of the sentence).
