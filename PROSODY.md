@@ -106,6 +106,7 @@ _ datang _ terminal _. Kepada _ penumpang _ telah _ milik _ karcis,
 _ sila _ me- _ -ki _ yang _ di- _ -kan. _ kasih.
 
 Verdict: doesn't sound natural. Very hard to get right "feel".
+Need to be a **really** good voice actor to do this right, but the difficulty level is too hard.
 
 Fill-in-the-blanks recording sound **much** better (but still slightly weird) than alternated.
 Fill-in-the-blanks recording is even better/natural when you use soft-spoken/whispering or articulated voice.
