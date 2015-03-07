@@ -44,6 +44,7 @@ public class LineExtractor {
     public static final Pattern K_REPLACER_WORD = Pattern.compile("[{]\\\\k(\\d+)[}](.+?)(?=[{]\\\\|$)");
 
     public static class VoiceMeta {
+        int length;
         int preStart;
         int preLength;
         int bodyStart;
@@ -80,11 +81,12 @@ public class LineExtractor {
                 strictFrames.upperEndpoint() + releaseFrames);
 
         final VoiceMeta voiceMeta = new VoiceMeta();
+        voiceMeta.length = frames.upperEndpoint() - frames.lowerEndpoint();
         voiceMeta.preStart = 0;
         voiceMeta.preLength = attackFrames;
         voiceMeta.bodyStart = attackFrames;
         voiceMeta.bodyLength = strictFrames.upperEndpoint() - strictFrames.lowerEndpoint();
-        voiceMeta.postStart = strictFrames.upperEndpoint();
+        voiceMeta.postStart = strictFrames.upperEndpoint() - frames.lowerEndpoint();
         voiceMeta.postLength = releaseFrames;
 
         double lengthInMs = (frames.upperEndpoint() - frames.lowerEndpoint()) * 1000d / sourceSample.getSampleRate();
@@ -153,6 +155,7 @@ public class LineExtractor {
                     Math.round(sourceSample.getSampleRate() * caption.end.getMseconds() / 1000f) );
             final File clauseFile = new File(clausesDir, clauseVoice.getId() + ".wav");
             final VoiceMeta clauseVoiceMeta = cutSegment(sourceSample, strictFrames, ATTACK_MS, RELEASE_MS, clauseFile, captionMarkup);
+            clauseVoice.setLength(clauseVoiceMeta.length);
             clauseVoice.setPreStart(clauseVoiceMeta.preStart);
             clauseVoice.setPreLength(clauseVoiceMeta.preLength);
             clauseVoice.setBodyStart(clauseVoiceMeta.bodyStart);
@@ -191,29 +194,31 @@ public class LineExtractor {
 
                     final String voiceId = SlugUtils.generateValidId(word.getId(),
                             it -> !speechGraph.getVoices().containsKey(it));
-                    final Voice voice = new Voice();
-                    voice.setId(voiceId);
-                    voice.setName(word.getName());
-                    voice.setKind(Voice.Kind.WORD);
-                    voice.setLanguage(INDONESIAN);
-                    voice.setPrevWordId(lastWord.map(Word::getId).orElse(null));
-                    voice.setSpeakerId("kid_telling_stories");
-                    speechGraph.getVoices().put(voice.getId(), voice);
+                    final Voice wordVoice = new Voice();
+                    wordVoice.setId(voiceId);
+                    wordVoice.setName(word.getName());
+                    wordVoice.setKind(Voice.Kind.WORD);
+                    wordVoice.setWordId(word.getId());
+                    wordVoice.setLanguage(INDONESIAN);
+                    wordVoice.setPrevWordId(lastWord.map(Word::getId).orElse(null));
+                    wordVoice.setSpeakerId("kid_telling_stories");
+                    speechGraph.getVoices().put(wordVoice.getId(), wordVoice);
 
                     final File wordFile = new File(wordsDir, voiceId + ".wav");
                     final Range<Integer> wordStrictFrames = Range.closedOpen(curFrame,
                             (int) Math.min(curFrame + durationInFrames, sourceSample.getNumFrames()));
                     log.info("Word '{}' ({}cs) {} ({} frames)", rawWord, durationInCs, wordStrictFrames, durationInFrames);
-                    final VoiceMeta voiceMeta = cutSegment(sourceSample, wordStrictFrames, ATTACK_MS, RELEASE_MS, wordFile, rawWord);
-                    voice.setPreStart(voiceMeta.preStart);
-                    voice.setPreLength(voiceMeta.preLength);
-                    voice.setBodyStart(voiceMeta.bodyStart);
-                    voice.setBodyLength(voiceMeta.bodyLength);
-                    voice.setPostStart(voiceMeta.postStart);
-                    voice.setPostLength(voiceMeta.postLength);
+                    final VoiceMeta wordVoiceMeta = cutSegment(sourceSample, wordStrictFrames, ATTACK_MS, RELEASE_MS, wordFile, rawWord);
+                    wordVoice.setLength(wordVoiceMeta.length);
+                    wordVoice.setPreStart(wordVoiceMeta.preStart);
+                    wordVoice.setPreLength(wordVoiceMeta.preLength);
+                    wordVoice.setBodyStart(wordVoiceMeta.bodyStart);
+                    wordVoice.setBodyLength(wordVoiceMeta.bodyLength);
+                    wordVoice.setPostStart(wordVoiceMeta.postStart);
+                    wordVoice.setPostLength(wordVoiceMeta.postLength);
                     curFrame += durationInFrames;
 
-                    lastWordVoice = Optional.of(voice);
+                    lastWordVoice = Optional.of(wordVoice);
                     lastWord = Optional.of(word);
                 } while (wordMatcher.find());
             } else {

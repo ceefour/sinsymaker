@@ -34,6 +34,7 @@ public class Voice {
     Locale language;
     String prevWordId;
     String nextWordId;
+    int length;
     int preStart;
     int preLength;
     int bodyStart;
@@ -123,6 +124,18 @@ public class Voice {
 
     public void setNextWordId(String nextWordId) {
         this.nextWordId = nextWordId;
+    }
+
+    /**
+     * Total length in frames, including pre and post.
+     * @return
+     */
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public int getPreStart() {
